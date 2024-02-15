@@ -13,13 +13,13 @@ public class Main {
 		int N, M;
 		String str;
 		
-		int[][] chess; // 8*8 보드 정보 받아줄 1차원 배열
+		int[][] chess; // 8*8 보드 정보 받아줄 2차원 배열
 		
 		ArrayList<Integer> countList = new ArrayList<>();
 		
 		st = new StringTokenizer(br.readLine());
-		N = Integer.parseInt(st.nextToken()); //10
-		M = Integer.parseInt(st.nextToken()); //13
+		N = Integer.parseInt(st.nextToken()); 
+		M = Integer.parseInt(st.nextToken()); 
 		
 		int board[][] = new int[N][M];
 		
@@ -82,36 +82,40 @@ public class Main {
 					}
 				}
 				
-				// 2. 첫 시작을 0으로 하는 체스판으로 만들때 다시 칠하는 횟수 구하기
-				int cntStartZero = 0;
-				for(int r=0; r<8; r++) {
-					for(int c=0; c<8; c++) {
-						
-						// 짝수번째 행이고
-						if(r%2==0) {
-							// 짝수번째 열이면서 0이 아니면 다시 칠하기
-							if(c%2 == 0 && chess[r][c] != 0) {
-								cntStartZero++;
-							}
-							// 홀수번째 열이면서 1이 아니면 다시 칠하기
-							else if(c%2 != 0 && chess[r][c] != 1) {
-								cntStartZero++;
-							}
-						}
-						// 홀수번째 행이고
-						else {
-							// 짝수번째 열이면서 1이 아니면 다시 칠하기
-							if(c%2 == 0 && chess[r][c] != 1) {
-								cntStartZero++;
-							}
-							// 홀수번째 열이면서 0이 아니면 다시 칠하기
-							else if(c%2 != 0 && chess[r][c] != 0) {
-								cntStartZero++;
-							}
-						}
-						
-					}
-				}
+//				System.out.print(cntStartOne+" ");
+				
+//				// 2. 첫 시작을 0으로 하는 체스판으로 만들때 다시 칠하는 횟수 구하기
+//				int cntStartZero = 0;
+//				for(int r=0; r<8; r++) {
+//					for(int c=0; c<8; c++) {
+//						
+//						// 짝수번째 행이고
+//						if(r%2==0) {
+//							// 짝수번째 열이면서 0이 아니면 다시 칠하기
+//							if(c%2 == 0 && chess[r][c] != 0) {
+//								cntStartZero++;
+//							}
+//							// 홀수번째 열이면서 1이 아니면 다시 칠하기
+//							else if(c%2 != 0 && chess[r][c] != 1) {
+//								cntStartZero++;
+//							}
+//						}
+//						// 홀수번째 행이고
+//						else {
+//							// 짝수번째 열이면서 1이 아니면 다시 칠하기
+//							if(c%2 == 0 && chess[r][c] != 1) {
+//								cntStartZero++;
+//							}
+//							// 홀수번째 열이면서 0이 아니면 다시 칠하기
+//							else if(c%2 != 0 && chess[r][c] != 0) {
+//								cntStartZero++;
+//							}
+//						}
+//						
+//					}
+//				}
+				int cntStartZero = 64 - cntStartOne;
+//				System.out.println(cntStartZero);
 				countList.add(Math.min(cntStartZero, cntStartOne));
 				
 				
