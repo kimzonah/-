@@ -10,7 +10,6 @@ public class Main {
 	static boolean[][] visited;
 	static int[] dr = {-1, 1, 0, 0};
 	static int[] dc = {0, 0, -1, 1};
-//	static ArrayList<int[]> ice = new ArrayList<>();
 	
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -28,7 +27,6 @@ public class Main {
 			for(int c=0; c<M; c++) {
 				int hight = Integer.parseInt(st.nextToken());
 				map[r][c] = hight;
-//				if(hight != 0) ice.add(new int[] {r,c,0});
 			}
 		}
 		
@@ -59,13 +57,6 @@ public class Main {
 				if(now > m ) map[r][c] = now - m;
 				else map[r][c] = 0;
 			}
-			
-//			for(int r=0; r<N; r++) {
-//				for(int c=0; c<M; c++) {
-//					System.out.print(map[r][c]+" ");
-//				}
-//				System.out.println();
-//			}
 			
 			// 몇덩어리인지 구하기
 			visited = new boolean[N][M];
