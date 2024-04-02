@@ -37,14 +37,15 @@ public class Solution {
 		
 	}
 	
-	// idx : height배열 인덱스 , sidx : sel배열 인덱스, sum : 더한값
+	// idx : height배열 인덱스 , sum : 더한값
 	static void select(int idx, int sum) {
+		
 		
 		// 모든 사람 탐색 했다면
 		if(idx == N) {
 //			System.out.println(sum);
 			if(sum >= B) {
-				min = Math.min(min, Math.abs(sum-B));
+				min = Math.min(min, (sum-B));
 			}
 			return;
 		}
