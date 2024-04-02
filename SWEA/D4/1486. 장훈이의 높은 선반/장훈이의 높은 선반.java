@@ -1,6 +1,5 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Solution {
@@ -40,15 +39,16 @@ public class Solution {
 	// idx : height배열 인덱스 , sum : 더한값
 	static void select(int idx, int sum) {
 		
-		
-		// 모든 사람 탐색 했다면
-		if(idx == N) {
-//			System.out.println(sum);
-			if(sum >= B) {
-				min = Math.min(min, (sum-B));
-			}
+		// sum이 B이상이라면
+		// 지금이 B이상이면서 차이가 가장 작을 때니까 min 갱신해주고 중단
+		if(sum >= B) {
+			min = Math.min(min, sum-B);
 			return;
 		}
+		
+		// 모든 사람 탐색 했다면
+		if(idx == N)
+			return;
 		
 		// 현재 사람을 탑에 포함한 경우
 		select(idx+1, sum+height[idx]);
