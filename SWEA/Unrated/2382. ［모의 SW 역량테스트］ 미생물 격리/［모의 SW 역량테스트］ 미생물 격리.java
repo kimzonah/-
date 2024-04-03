@@ -165,7 +165,6 @@ class Group {
 	int c;
 	int num;
 	int direc;
-	int time;
 	boolean alive;
 
 	Group(int r, int c, int num, int direc) {
@@ -174,7 +173,6 @@ class Group {
 		this.num = num;
 		this.direc = direc;
 		alive = true;
-		time = 0;
 	}
 
 }
