@@ -2,73 +2,60 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
+// DP로 풀이
 public class Solution {
-
-	static int[] ticket = new int[4];
-	static int[] swimDay = new int[13];
-	static boolean[] visited;
-	static int min;
-
 	public static void main(String[] args) throws Exception {
 
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st;
+		StringBuilder sb = new StringBuilder();
 
 		int T = Integer.parseInt(br.readLine());
 
-		for (int t = 1; t <= T; t++) {
+		int[] ticket = new int[4]; // 0:일일권, 1:한달권, 2:세달권, 3:일년권
+		int[] plan = new int[13];
+		int[] dp;
 
+		for (int t = 1; t <= T; t++) {
+			dp = new int[13];
+
+			// 이용권 가격 정보 받기
 			st = new StringTokenizer(br.readLine());
 			for (int i = 0; i < 4; i++) {
 				ticket[i] = Integer.parseInt(st.nextToken());
 			}
 
+			// 월별 수영 계획 입력 받기
 			st = new StringTokenizer(br.readLine());
 			for (int i = 1; i < 13; i++) {
-				swimDay[i] = Integer.parseInt(st.nextToken());
+				plan[i] = Integer.parseInt(st.nextToken());
 			}
 
-			min = ticket[3];
-			DFS(1, 0);
-			System.out.println("#" + t + " " + min);
+			for (int i = 1; i < 13; i++) { // 1~12월
+
+				int min = Integer.MAX_VALUE;
+
+				// 일일권 사기
+				min = Math.min(dp[i - 1] + ticket[0] * plan[i], min);
+
+				// 한달권 사기
+				if (i >= 1)
+					min = Math.min(dp[i - 1] + ticket[1], min);
+				
+				// 세달권 사기
+				if (i >= 3)
+					min = Math.min(dp[i - 3] + ticket[2], min);
+
+				dp[i] = min;
+
+			}
+
+			sb.append("#" + t + " " + Math.min(dp[12], ticket[3]) + "\n");
 
 		}
+
+		System.out.println(sb);
+
 	}
 
-	static void DFS(int month, int price) {
-
-//        System.out.println(month);
-
-		if (price >= min)
-			return;
-
-		if (month > 12) {
-			if (min > price)
-				min = price;
-			return;
-		}
-
-		// 이번달에 수영을 안가면 다음달로
-		if (swimDay[month] == 0) {
-			DFS(month + 1, price);
-		}
-		// 이번달에 수영을 할 때만
-		else {
-
-			// 현재달 일일권 산다면
-			DFS(month + 1, price + swimDay[month] * ticket[0]);
-
-			// 현재달 한달권 산다면
-			DFS(month + 1, price + ticket[1]);
-
-			// 현재달 포함 세달권 산다면 세 달 뒤로
-			DFS(month + 3, price + ticket[2]);
-			
-
-//			// 1년 이용권
-//			DFS(12, price + ticket[3]);
-
-		}
-
-	}
 }
