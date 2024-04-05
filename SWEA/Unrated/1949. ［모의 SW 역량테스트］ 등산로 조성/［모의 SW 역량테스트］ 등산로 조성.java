@@ -12,7 +12,7 @@ public class Solution {
 	static ArrayList<int[]> topList;
 	static int[] dr = { -1, 1, 0, 0 };
 	static int[] dc = { 0, 0, -1, 1 };
-	static int top, low;
+	static int top;
 
 	public static void main(String[] args) throws Exception {
 
