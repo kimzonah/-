@@ -32,8 +32,6 @@ public class Main {
 			visited[r][0] = true;
 			able = false;
 			putPipe(r, 0);
-			if (able)
-				cnt++;
 		}
 
 		System.out.println(cnt);
@@ -44,27 +42,28 @@ public class Main {
 		// 세 방향으로 하나씩 보내보기
 		for (int d = 0; d < 3; d++) {
 
-			if (!able) {
+			int nr = r + dr[d];
+			int nc = c + dc[d];
 
-				int nr = r + dr[d];
-				int nc = c + dc[d];
-
-				// 다음 칸이 빵집이라면 중단
-				if (nc == C - 1) {
-					able = true;
-					return;
-				}
-
-				// 경계 넘거나 벽이거나 이미 가본 길이라면 다음 방향으로
-				if (nr < 0 || nr >= R || map[nr][nc] == 'x' || visited[nr][nc]) {
-					continue;
-				}
-
-				// 갈 수 있는 곳이면 방문 처리 해주고 이동
-				visited[nr][nc] = true;
-				putPipe(nr, nc);
-
+			// 빵집까지 연결 성공했다면 true로 바꿔주고 카운트 +1 이후의 경우는 보지 않음
+			if (nc == C - 1) {
+				able = true;
+				cnt++;
+				return;
 			}
+
+			// 경계 넘거나 벽이거나 이미 가본 길이라면 다음 방향으로
+			if (nr < 0 || nr >= R || map[nr][nc] == 'x' || visited[nr][nc]) {
+				continue;
+			}
+
+			// 갈 수 있는 곳이면 방문 처리 해주고 이동
+			visited[nr][nc] = true;
+			putPipe(nr, nc);
+			
+			// 리턴해서 돌아왔을 때 true면 이후의 경우는 보지 않음
+			if(able) return;
+
 		}
 
 	}
